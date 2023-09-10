@@ -1,7 +1,5 @@
 # MASK webdev application
 
-___
-
 ## About me
 
 Hiya!  
