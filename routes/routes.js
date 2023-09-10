@@ -19,11 +19,11 @@ async function main() {
 }
 
 router.post('/submit-form',
-  body('username_field').notEmpty().escape(),
-  body('name1_field').notEmpty(),
-  body('name2_field').notEmpty(),
-  body('pronouns_field').notEmpty(),
-  body('age_field').notEmpty(),
+  body('username_field').notEmpty().matches(/[a-z_]+/).escape(),
+  body('name1_field').notEmpty().matches(/[a-zA-Z]+/),
+  body('name2_field').notEmpty().matches(/[a-zA-Z]+/),
+  body('pronouns_field').notEmpty().matches(/[a-zA-Z]+\/[a-zA-Z]+/),
+  body('age_field').notEmpty().matches(/\d+/),
   (req, res) => {
   console.log('Validation started');
   const result = validationResult(req);
@@ -31,9 +31,7 @@ router.post('/submit-form',
   if (result.isEmpty()) {
     const data = matchedData(req);
     console.log('Validation success');
-    console.log(data)
     dbh(data);
-    console.log('model saved');
     res.status(200);
     res.send('Success!');
   }
