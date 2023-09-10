@@ -1,11 +1,10 @@
 const express = require('express');
+const routes = require('./routes/routes.js');
+const config = require('./config.json');
 const app = express();
-const { port } = require("./config.json");
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+app.use('/', routes);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+app.listen(config.port, () => {
+  console.log(`Example app listening on port ${config.port}`);
+});
